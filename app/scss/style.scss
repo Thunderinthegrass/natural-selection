@@ -1,0 +1,93 @@
+@import "vars";
+@import "fonts";
+@import "reset";
+@import "libs";
+@import "global";
+body {
+  margin: 0;
+  // background-color: #838668;
+  // background-color: #050a36;
+  overflow: hidden;
+}
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.scene {
+  width: 80vw;
+  height: 80vh;
+  overflow: hidden;
+  position: relative;
+  overflow: visible;
+  background: #f58d8d6c;
+}
+.gw-part {
+  background-color: rgb(255, 255, 255);
+  // width: 0;
+  // height: 0;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+  transition-timing-function: linear;
+  background: #000;
+}
+.gw-part__item {
+  content: "";
+  display: block;
+  // background-color: rgb(19, 224, 231);
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  transition-timing-function: ease-in;
+}
+.start-btn{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.stop-btn{
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  cursor: pointer;
+}
+.food-item{
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  transition-timing-function: ease-in;
+  background: #389721;
+}
+.food-management{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 5px;
+  border: 1px solid #3b9940;
+  position: absolute;
+  left: 20px;
+  top: 80px;
+}
+.food-input{
+  border: 1px solid #3b9940;
+}
+.food-btn{
+  cursor: pointer;
+}

@@ -1,0 +1,291 @@
+@font-face {
+  font-family: "Roboto";
+  src: url(../fonts/roboto-regular.woff2), url(../fonts/roboto-regular.woff);
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url(../fonts/roboto-medium.woff2), url(../fonts/roboto-medium.woff);
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url(../fonts/roboto-bold.woff2), url(../fonts/roboto-bold.woff);
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+ul,
+ol {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul[class] {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
+
+input {
+  outline: none;
+}
+
+section {
+  padding: 20px;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+.footer {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
+.container {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #000000;
+  position: relative;
+}
+
+.view-rightsidemenu {
+  position: fixed;
+  right: 0;
+  top: 100px;
+  border: 2px solid #9e9b9b;
+  color: #9e9b9b;
+  padding: 5px;
+  border-radius: 20px 2px 2px 2px;
+  cursor: pointer;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.page-count {
+  display: none;
+  position: absolute;
+  top: 9px;
+  right: 14px;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 30px;
+  color: #d18929;
+}
+@media (max-width: 500px) {
+  .page-count {
+    display: block;
+  }
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+}
+
+.scene {
+  width: 80vw;
+  height: 80vh;
+  overflow: hidden;
+  position: relative;
+  overflow: visible;
+  background: rgba(245, 141, 141, 0.4235294118);
+}
+
+.gw-part {
+  background-color: rgb(255, 255, 255);
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+  -webkit-transition-timing-function: linear;
+       -o-transition-timing-function: linear;
+          transition-timing-function: linear;
+  background: #000;
+}
+
+.gw-part__item {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  -webkit-transition-timing-function: ease-in;
+       -o-transition-timing-function: ease-in;
+          transition-timing-function: ease-in;
+}
+
+.start-btn {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+.stop-btn {
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  cursor: pointer;
+}
+
+.food-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  -webkit-transition-timing-function: ease-in;
+       -o-transition-timing-function: ease-in;
+          transition-timing-function: ease-in;
+  background: #389721;
+}
+
+.food-management {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+  padding: 5px;
+  border: 1px solid #3b9940;
+  position: absolute;
+  left: 20px;
+  top: 80px;
+}
+
+.food-input {
+  border: 1px solid #3b9940;
+}
+
+.food-btn {
+  cursor: pointer;
+}
+@supports (-webkit-appearance:none){
+
+}
+
+ @media (max-width: 500px){
+
+@supports (-webkit-appearance:none){
+
+}
+
+}
