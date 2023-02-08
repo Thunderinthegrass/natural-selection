@@ -29,19 +29,22 @@
 //   // }
 // }
 
-
 // пример из интернета
-let startBtn = document.querySelector('.start-btn');
-let stopBtn = document.querySelector('.stop-btn');
+let scene = document.querySelector(".scene");
+let startBtn = document.querySelector(".start-btn");
+let stopBtn = document.querySelector(".stop-btn");
 
-startBtn.addEventListener('click', function (e) {
-  let scene = document.querySelector(".scene");
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+startBtn.addEventListener("click", function (e) {
   if (!scene) {
-      return;
+    return;
   }
 
-  startBtn.setAttribute('disabled', 'disabled');
-  stopBtn.removeAttribute('disabled', 'disabled');
+  startBtn.setAttribute("disabled", "disabled");
+  stopBtn.removeAttribute("disabled", "disabled");
 
   let time = 1000;
   let timeTransitionMin = time * 4;
@@ -49,75 +52,93 @@ startBtn.addEventListener('click', function (e) {
   let timeIntervalMin = time;
   let timeIntervalMax = time * 3;
   let size = 1.5;
-  for (let i = 0; i < 1; i++) {
-      GWcreatePart(scene);
+  for (let i = 0; i < 3; i++) {
+    GWcreatePart(scene);
   }
 
+  function GWcreatePart(scene) {
+    let part = document.createElement("div");
+    part.className = "gw-part";
+    scene.appendChild(part);
 
-    function GWcreatePart(scene) {
-      let part = document.createElement('div');
-      part.className = "gw-part";
-      scene.appendChild(part);
+    let start = setInterval(function () {
+      let tempTime = getRandomInt(timeTransitionMin, timeTransitionMax);
+      part.style.transition = tempTime + "ms all";
+      part.style.transform =
+        "translateX(" +
+        getRandomInt(
+          -scene.getBoundingClientRect().width / size,
+          scene.getBoundingClientRect().width / size
+        ) +
+        "px) translateY(" +
+        getRandomInt(
+          -scene.getBoundingClientRect().height / size,
+          scene.getBoundingClientRect().height / size
+        ) +
+        "px)";
+    }, getRandomInt(timeIntervalMin, timeIntervalMax));
 
-      let start = setInterval(function () {
-          let tempTime = getRandomInt(timeTransitionMin, timeTransitionMax);
-          part.style.transition = tempTime + "ms all";
-          part.style.transform = 'translateX(' + getRandomInt(-scene.getBoundingClientRect().width / size, scene.getBoundingClientRect().width / size) + 'px) translateY(' + getRandomInt(-scene.getBoundingClientRect().height / size, scene.getBoundingClientRect().height / size) + 'px)';
+    stopBtn.addEventListener("click", () => {//останавливаем анимацию, удаляем едоков
+      stopBtn.setAttribute("disabled", "disabled");
+      startBtn.removeAttribute("disabled", "disabled");
 
-      }, getRandomInt(timeIntervalMin, timeIntervalMax));
+      let partItem = document.querySelectorAll(".gw-part");
+      clearInterval(start);
+      setTimeout(() => {
+        partItem.forEach((elem) => {
+          scene.removeChild(elem);
+        });
+      }, 5000);
+    });
 
-      stopBtn.addEventListener('click', () => {
-        stopBtn.setAttribute('disabled', 'disabled');
-        startBtn.removeAttribute('disabled', 'disabled');
+    part.style.backgroundColor = `hsl(${getRandomInt(0, 360)}, ${getRandomInt(80, 100)}%, ${getRandomInt(45, 55)}%)`; //рандомный цвет
 
-        let partItem = document.querySelectorAll('.gw-part');
-        clearInterval(start);
-        setTimeout(() => {
-            partItem.forEach(elem => {
-                scene.removeChild(elem);
-            });
-        }, 5000);
-      })
+    //появление еды
+    function food() {
+      let foodInput = document.querySelector(".food-input");
+      let foodBtn = document.querySelector(".food-btn");
 
-      part.style.backgroundColor = `hsl(${getRandomInt(0, 360)}, ${getRandomInt(80, 100)}%, ${getRandomInt(45, 55)}%)`;//рандомный цвет
-    }
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
 
-  function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  function food() {
-    let foodInput = document.querySelector('.food-input');
-    let foodBtn = document.querySelector('.food-btn');
-
-    function addFood() {
-        let foodItem = document.createElement('div');
+      function addFood() {
+        //создание элемента еды
+        let foodItem = document.createElement("div");
         foodItem.className = "food-item";
         foodItem.style.left = `${getRandomInt(0, 100)}%`;
         foodItem.style.top = `${getRandomInt(0, 100)}%`;
         scene.appendChild(foodItem);
-    }
 
-    function cleanInput() {
-        document.querySelector('.food-input').value = '';
-    }
+        function checkLocation() {//функция съедания еды
+          setTimeout(() => {//каждые 100 миллисекунд проверяем, покрывает ли едок еду
+            
+            if ((part.getBoundingClientRect().x > (foodItem.getBoundingClientRect().x - 80) && part.getBoundingClientRect().x < (foodItem.getBoundingClientRect().x + 20)) && (part.getBoundingClientRect().y > (foodItem.getBoundingClientRect().y - 80) && part.getBoundingClientRect().y < (foodItem.getBoundingClientRect().y + 20))) {
+              scene.removeChild(foodItem);
+            }
+    
+            checkLocation();
+          }, 100);
+        }
+        checkLocation();
+      }
 
-    foodBtn.addEventListener('click', () => {
+      function cleanInput() {
+        document.querySelector(".food-input").value = "";
+      }
+
+      foodBtn.addEventListener("click", () => {
         let value = foodInput.value;
         if (value > 0) {
-            for (let i = 0; i < value; i++) {
-                addFood();
-            }
+          for (let i = 0; i < value; i++) {
+            //цикл количества еды
+            addFood();
+          }
         }
+      });
 
-        setTimeout(function eat() {
-            let foodItem = document.querySelector('.food-item');
-            console.log(foodItem.getBoundingClientRect());
-          }, 1000);
-    })
-
-    foodBtn.addEventListener('click', cleanInput);
-
+      foodBtn.addEventListener("click", cleanInput);
+    }
+    food();
   }
-  food();
 });
