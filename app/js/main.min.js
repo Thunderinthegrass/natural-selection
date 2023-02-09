@@ -38,6 +38,10 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function getRandomIntWithoutRounding(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 startBtn.addEventListener("click", function (e) {
   if (!scene) {
     return;
@@ -52,7 +56,9 @@ startBtn.addEventListener("click", function (e) {
   let timeIntervalMin = time;
   let timeIntervalMax = time * 3;
   let size = 1.5;
-  for (let i = 0; i < 3; i++) {
+  let gnatInputValue = document.querySelector('.gnat-input').value;
+
+  for (let i = 0; i < gnatInputValue; i++) {
     GWcreatePart(scene);
   }
 
@@ -72,7 +78,7 @@ startBtn.addEventListener("click", function (e) {
         ) +
         "px) translateY(" +
         getRandomInt(
-          -scene.getBoundingClientRect().height / size,
+        -scene.getBoundingClientRect().height / size,
           scene.getBoundingClientRect().height / size
         ) +
         "px)";
@@ -91,7 +97,13 @@ startBtn.addEventListener("click", function (e) {
       }, 5000);
     });
 
-    part.style.backgroundColor = `hsl(${getRandomInt(0, 360)}, ${getRandomInt(80, 100)}%, ${getRandomInt(45, 55)}%)`; //рандомный цвет
+    //цвета
+    let red = getRandomInt(0, 255);
+    let green = getRandomInt(0, 255);
+    let blue = getRandomInt(0, 255);
+    // let alpha = getRandomIntWithoutRounding(0, 1);
+    let alpha = 1;
+    part.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`; //рандомный цвет
 
     //появление еды
     function food() {
@@ -110,12 +122,30 @@ startBtn.addEventListener("click", function (e) {
         foodItem.style.top = `${getRandomInt(0, 100)}%`;
         scene.appendChild(foodItem);
 
+        let gnat = document.querySelectorAll('.gw-part');//после появления еды берем всех едоков
+
         function checkLocation() {//функция съедания еды
+
+          function opacityLess(el) {
+            let elemOpacity = window.getComputedStyle(el).opacity;
+            elemOpacity = elemOpacity - 0.1;
+            el.style.opacity = elemOpacity;
+            console.log(elemOpacity)
+            return;
+          }
+
           setTimeout(() => {//каждые 100 миллисекунд проверяем, покрывает ли едок еду
-            
-            if ((part.getBoundingClientRect().x > (foodItem.getBoundingClientRect().x - 80) && part.getBoundingClientRect().x < (foodItem.getBoundingClientRect().x + 20)) && (part.getBoundingClientRect().y > (foodItem.getBoundingClientRect().y - 80) && part.getBoundingClientRect().y < (foodItem.getBoundingClientRect().y + 20))) {
-              scene.removeChild(foodItem);
-            }
+            gnat.forEach((elem) => {
+              let elemOp = window.getComputedStyle(elem).opacity;
+                if (elemOp < 0) {
+                  scene.removeChild(elem);
+                }
+
+              if ((elem.getBoundingClientRect().x > (foodItem.getBoundingClientRect().x - 80) && elem.getBoundingClientRect().x < (foodItem.getBoundingClientRect().x + 20)) && (elem.getBoundingClientRect().y > (foodItem.getBoundingClientRect().y - 80) && elem.getBoundingClientRect().y < (foodItem.getBoundingClientRect().y + 20))) {
+                scene.removeChild(foodItem);
+                opacityLess(elem);
+              }
+            })
     
             checkLocation();
           }, 100);
@@ -123,7 +153,7 @@ startBtn.addEventListener("click", function (e) {
         checkLocation();
       }
 
-      function cleanInput() {
+      function cleanFoodInput() {//очистка инпута еды после клика по кнопке добавления еды
         document.querySelector(".food-input").value = "";
       }
 
@@ -137,7 +167,7 @@ startBtn.addEventListener("click", function (e) {
         }
       });
 
-      foodBtn.addEventListener("click", cleanInput);
+      foodBtn.addEventListener("click", cleanFoodInput);
     }
     food();
   }

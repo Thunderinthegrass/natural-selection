@@ -210,34 +210,14 @@ body {
        -o-transition-timing-function: linear;
           transition-timing-function: linear;
   background: #000;
-}
-
-.gw-part__item {
-  content: "";
-  display: block;
-  width: 80px;
-  height: 80px;
   border-radius: 100%;
-  overflow: hidden;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  -webkit-transition-timing-function: ease-in;
-       -o-transition-timing-function: ease-in;
-          transition-timing-function: ease-in;
 }
 
 .start-btn {
-  position: absolute;
-  left: 20px;
-  top: 20px;
   cursor: pointer;
 }
 
 .stop-btn {
-  position: absolute;
-  left: 20px;
-  top: 50px;
   cursor: pointer;
 }
 
@@ -255,6 +235,25 @@ body {
   background: #389721;
 }
 
+.management-panel {
+  position: absolute;
+  left: 10px;
+  top: 10vh;
+}
+
+.gnat-management {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+  padding: 5px;
+  border: 1px solid #3b9940;
+}
+
 .food-management {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -266,12 +265,9 @@ body {
   gap: 15px;
   padding: 5px;
   border: 1px solid #3b9940;
-  position: absolute;
-  left: 20px;
-  top: 80px;
 }
 
-.food-input {
+.input {
   border: 1px solid #3b9940;
 }
 

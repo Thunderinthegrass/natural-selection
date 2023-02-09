@@ -5,8 +5,6 @@
 @import "global";
 body {
   margin: 0;
-  // background-color: #838668;
-  // background-color: #050a36;
   overflow: hidden;
 }
 .main {
@@ -29,8 +27,6 @@ body {
 }
 .gw-part {
   background-color: rgb(255, 255, 255);
-  // width: 0;
-  // height: 0;
   width: 80px;
   height: 80px;
   position: absolute;
@@ -38,30 +34,12 @@ body {
   left: calc(50% - 10px);
   transition-timing-function: linear;
   background: #000;
-}
-.gw-part__item {
-  content: "";
-  display: block;
-  // background-color: rgb(19, 224, 231);
-  width: 80px;
-  height: 80px;
   border-radius: 100%;
-  overflow: hidden;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  transition-timing-function: ease-in;
 }
 .start-btn{
-  position: absolute;
-  left: 20px;
-  top: 20px;
   cursor: pointer;
 }
 .stop-btn{
-  position: absolute;
-  left: 20px;
-  top: 50px;
   cursor: pointer;
 }
 .food-item{
@@ -75,17 +53,26 @@ body {
   transition-timing-function: ease-in;
   background: #389721;
 }
+.management-panel{
+  position: absolute;
+  left: 10px;
+  top: 10vh;
+}
+.gnat-management{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 5px;
+  border: 1px solid #3b9940;
+}
 .food-management{
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 5px;
   border: 1px solid #3b9940;
-  position: absolute;
-  left: 20px;
-  top: 80px;
 }
-.food-input{
+.input{
   border: 1px solid #3b9940;
 }
 .food-btn{
