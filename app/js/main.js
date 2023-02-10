@@ -64,8 +64,12 @@ startBtn.addEventListener("click", function (e) {
 
   function GWcreatePart(scene) {
     let part = document.createElement("div");
-    part.className = "gw-part";
+    part.className = "part";
     scene.appendChild(part);
+
+    let partInner = document.createElement("div");
+    partInner.className = "part-inner";
+    part.appendChild(partInner);
 
     let start = setInterval(function () {
       let tempTime = getRandomInt(timeTransitionMin, timeTransitionMax);
@@ -88,7 +92,7 @@ startBtn.addEventListener("click", function (e) {
       stopBtn.setAttribute("disabled", "disabled");
       startBtn.removeAttribute("disabled", "disabled");
 
-      let partItem = document.querySelectorAll(".gw-part");
+      let partItem = document.querySelectorAll(".part");
       clearInterval(start);
       setTimeout(() => {
         partItem.forEach((elem) => {
@@ -103,7 +107,7 @@ startBtn.addEventListener("click", function (e) {
     let blue = getRandomInt(0, 255);
     // let alpha = getRandomIntWithoutRounding(0, 1);
     let alpha = 1;
-    part.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`; //рандомный цвет
+    partInner.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`; //рандомный цвет
 
     //появление еды
     function food() {
@@ -122,33 +126,58 @@ startBtn.addEventListener("click", function (e) {
         foodItem.style.top = `${getRandomInt(0, 100)}%`;
         scene.appendChild(foodItem);
 
-        let gnat = document.querySelectorAll('.gw-part');//после появления еды берем всех едоков
+        let gnat = document.querySelectorAll('.part');//после появления еды берем всех едоков
 
         function checkLocation() {//функция съедания еды
 
-          function opacityLess(el) {
-            let elemOpacity = window.getComputedStyle(el).opacity;
-            elemOpacity = elemOpacity - 0.1;
-            el.style.opacity = elemOpacity;
-            console.log(elemOpacity)
-            return;
-          }
+          // gnat.forEach((elem) => {
+          //   function opacityLess(el) {//удаляет элемент, который становится прозрачным, с каждым поеданием он становится все более прозрачным
+          //     let elInner = el.querySelector('.part-inner');
+          //     let elemOpacity = window.getComputedStyle(elInner).opacity;
+          //     elemOpacity = elemOpacity - 0.05;
+          //     elInner.style.opacity = elemOpacity;
+          //     console.log(elemOpacity)
 
-          setTimeout(() => {//каждые 100 миллисекунд проверяем, покрывает ли едок еду
+          //     if (elemOpacity <= 0.05) {
+          //           scene.removeChild(elem);
+          //           return;
+          //         }
+
+          //     setTimeout(() => {
+          //       opacityLess(elem);
+          //     }, 1000)
+          //   }
+          //   opacityLess(elem);
+          // })
+
+          setTimeout(() => {//каждые 10 миллисекунд проверяем, покрывает ли едок еду
             gnat.forEach((elem) => {
+
+              function opacityMore(el) {//удаляет элемент, который становится прозрачным, с каждым поеданием он становится все более прозрачным
+                let elInner = el.querySelector('.part-inner');
+                let elemOpacity = window.getComputedStyle(elInner).opacity;
+                elemOpacity = +elemOpacity + 0.05;
+                elInner.style.opacity = elemOpacity;
+                console.log(elemOpacity)
+
+                if (elemOpacity >= 0.95) {
+                      // scene.removeChild(elem);
+                      elemOpacity = 1;
+                    }
+
+                return;
+              }
+
               let elemOp = window.getComputedStyle(elem).opacity;
-                if (elemOp < 0) {
-                  scene.removeChild(elem);
-                }
 
               if ((elem.getBoundingClientRect().x > (foodItem.getBoundingClientRect().x - 80) && elem.getBoundingClientRect().x < (foodItem.getBoundingClientRect().x + 20)) && (elem.getBoundingClientRect().y > (foodItem.getBoundingClientRect().y - 80) && elem.getBoundingClientRect().y < (foodItem.getBoundingClientRect().y + 20))) {
                 scene.removeChild(foodItem);
-                opacityLess(elem);
+                opacityMore(elem);
               }
             })
     
             checkLocation();
-          }, 100);
+          }, 10);
         }
         checkLocation();
       }

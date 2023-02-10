@@ -199,18 +199,25 @@ body {
   background: rgba(245, 141, 141, 0.4235294118);
 }
 
-.gw-part {
+.part {
   background-color: rgb(255, 255, 255);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   position: absolute;
   top: calc(50% - 10px);
   left: calc(50% - 10px);
   -webkit-transition-timing-function: linear;
        -o-transition-timing-function: linear;
           transition-timing-function: linear;
-  background: #000;
   border-radius: 100%;
+  overflow: hidden;
+  border: 1px solid #ec0e0e;
+}
+
+.part-inner {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
 }
 
 .start-btn {
