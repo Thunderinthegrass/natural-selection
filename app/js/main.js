@@ -1,35 +1,4 @@
 // // gnat--------------
-// let start = document.querySelector('.btn');
-// start.addEventListener('click', gnatFly);
-// let gnat = document.querySelector('.gnat');
-
-// let route = 0;
-
-// let flag = 0;
-
-// function gnatFly() {
-
-//   if (flag == 0) {
-//     route = Math.round(Math.random() * 500);
-//     // routeBack = route - (route * 2);
-
-//     gnat.style.backgroundColor = "#ff5555";
-//     // gnat.style.transform = `translateX(${route}vw)`;
-//     gnat.style.transform = `rotate(${route}deg) translateX(${route}px) rotate(${route}deg)`;
-//     // flag = 1;
-
-//     console.log(route);
-//     // console.log(routeBack);
-//   }
-//   // else{
-//   //   gnat.style.backgroundColor = "#0ddfee";
-//   //   // gnat.style.transform = "translateX(0)";
-//   //   // gnat.style.transform = "rotate(0deg) translateX(-100px) rotate(0deg)";
-//   //   flag = 0;
-//   // }
-// }
-
-// пример из интернета
 let scene = document.querySelector(".scene");
 let startBtn = document.querySelector(".start-btn");
 let stopBtn = document.querySelector(".stop-btn");
@@ -38,6 +7,7 @@ let foodEatenCount = 0;
 let foodEaten = document.querySelector('.food-eaten');
 let deadGnatCount = 0;
 let deadGnatCounter = document.querySelector('.dead-gnat-counter');
+let gnatIcons = document.querySelector('.gnat-icons');
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -75,6 +45,15 @@ startBtn.addEventListener("click", function (e) {
     let partInner = document.createElement("div");//наделение едока душой
     partInner.className = "part-inner";
     part.appendChild(partInner);
+    
+
+    let gnatIcon = document.createElement('div');//создание иконки комара
+    gnatIcon.className = 'gnat-icon';
+    gnatIcons.appendChild(gnatIcon);
+
+    let gnatInfo = document.createElement('span');//создание информационной иконки комара
+    gnatInfo.className = 'gnat-info';
+    gnatIcon.appendChild(gnatInfo);
 
     let start = setInterval(function () {//функция рандомного движения едоков
       let tempTime = getRandomInt(timeTransitionMin, timeTransitionMax);
@@ -97,7 +76,7 @@ startBtn.addEventListener("click", function (e) {
       let gnat = document.querySelectorAll('.part-inner');
       let gnatCount = document.querySelector('.gnat-counter');
 
-      gnat.forEach((elem) => {//вписываем внутрь едока его прозрачность
+      gnat.forEach((elem, id) => {//вписываем внутрь едока его прозрачность
         let elemOpacity = window.getComputedStyle(elem).opacity;
         elem.textContent = elemOpacity;
       })
@@ -128,7 +107,11 @@ startBtn.addEventListener("click", function (e) {
     let blue = getRandomInt(0, 255);
     // let alpha = getRandomIntWithoutRounding(0, 1);
     let alpha = 1;
-    partInner.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`; //рандомный цвет
+    partInner.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`; //рандомный цвет комаров
+
+    let iconBg = window.getComputedStyle(partInner).backgroundColor;//цвет иконок как у комаров
+    gnatIcon.style.backgroundColor = iconBg;
+    gnatIcon.style.borderColor = iconBg;
 
     //появление еды
     function food() {
@@ -224,16 +207,21 @@ startBtn.addEventListener("click", function (e) {
 
   function gnatOpacityLess() {//функция уменьшения непрозрачности
     let gnat = document.querySelectorAll('.part');
-    gnat.forEach((elem) => {
+    let gnatIcon = document.querySelectorAll('.gnat-icon');
+    let gnatInfo = document.querySelectorAll('.gnat-info');
+    gnat.forEach((elem, id) => {
       function opacityLess(el) {//удаляет элемент, который становится прозрачным, с каждым поеданием он становится все более прозрачным
         let elInner = el.querySelector('.part-inner');
         let elemOpacity = window.getComputedStyle(elInner).opacity;
         elemOpacity = elemOpacity - 0.05;
         elInner.style.opacity = elemOpacity;
+        gnatInfo[id].textContent = elemOpacity.toFixed(2);//добавление подписи со значением прозрачности к иконке комара
         console.log(elemOpacity);
 
-        if (elemOpacity <= 0.05) {
+        if (elemOpacity < 0.05) {
               scene.removeChild(elem);
+              gnatIcon[id].classList.add('dead-gnat-icon');
+              gnatInfo[id].textContent = 'умер';
               deadGnatCount += 1;
               deadGnatCounter.textContent = deadGnatCount;
               return;

@@ -179,19 +179,16 @@ input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   min-height: 100vh;
+  padding-right: 10vh;
 }
 
 .scene {
@@ -259,7 +256,8 @@ input {
 
 .management-panel {
   position: absolute;
-  left: 10px;
+  width: 25vh;
+  left: 3vh;
   top: 10vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -303,6 +301,35 @@ input {
 
 .food-btn {
   cursor: pointer;
+}
+
+.gnat-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+}
+
+.gnat-icon {
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+  position: relative;
+  border-radius: 100%;
+}
+.gnat-icon span {
+  position: absolute;
+  right: -160%;
+  top: 0;
+  background: #fdfdfd;
+}
+
+.dead-gnat-icon {
+  background-color: transparent !important;
 }
 @supports (-webkit-appearance:none){
 
