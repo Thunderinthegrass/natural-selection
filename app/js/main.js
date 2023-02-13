@@ -33,6 +33,8 @@ startBtn.addEventListener("click", function (e) {
   let size = 1.5;
   let gnatInputValue = document.querySelector('.gnat-input').value;
 
+  
+
   for (let i = 0; i < gnatInputValue; i++) {
     GWcreatePart(scene);
   }
@@ -130,20 +132,23 @@ startBtn.addEventListener("click", function (e) {
         foodItem.style.top = `${getRandomInt(0, 100)}%`;
         scene.appendChild(foodItem);
 
-        let gnat = document.querySelectorAll('.part');//после появления еды берем всех едоков
+        // let gnat = document.querySelectorAll('.part');//после появления еды берем всех едоков
 
         function checkLocation() {//функция съедания еды
+          let gnat = document.querySelectorAll('.part');//после появления еды берем всех едоков
           setTimeout(() => {//каждые 10 миллисекунд проверяем, покрывает ли едок еду
             gnat.forEach((elem) => {
-              function opacityMore(el) {//с каждым поеданием элемент становится более насыщенным
+              function opacityMore(el, id) {//с каждым поеданием элемент становится более насыщенным
                 let elInner = el.querySelector('.part-inner');
                 let elemOpacity = window.getComputedStyle(elInner).opacity;
                 elemOpacity = +elemOpacity + 0.05;
                 elInner.style.opacity = elemOpacity;
                 console.log(elemOpacity)
 
-                if (elemOpacity >= 0.95) {
-                      elemOpacity = 1;
+                if (elemOpacity > 0.95) {
+                      elemOpacity = 0.5;
+                      elInner.style.opacity = elemOpacity;
+                      GWcreatePart(scene);
                     }
 
                 return;
@@ -171,7 +176,7 @@ startBtn.addEventListener("click", function (e) {
       }
 
       foodBtn.addEventListener("click", () => {
-        let interval = foodInterval.value;//интервал появления еды
+        let interval = foodInterval.value * 1000;//интервал появления еды
         let quantityValue = foodInput.value;//количество еды
 
         function quantityFood() {
@@ -220,19 +225,35 @@ startBtn.addEventListener("click", function (e) {
 
         if (elemOpacity < 0.05) {
               scene.removeChild(elem);
-              gnatIcon[id].classList.add('dead-gnat-icon');
-              gnatInfo[id].textContent = 'умер';
+              document.querySelector('.gnat-icons').removeChild(gnatIcon[id]);
               deadGnatCount += 1;
               deadGnatCounter.textContent = deadGnatCount;
               return;
-            }
-
-        setTimeout(() => {
-          opacityLess(elem);
-        }, 10000)
+        }
       }
       opacityLess(elem);
     })
+    setTimeout(() => {
+      gnatOpacityLess();
+    }, 5000);
   }
   foodBtn.addEventListener('click', gnatOpacityLess);
+
+  let satiety = document.querySelector('.satiety');//функция сытости
+  function satietyCount() {
+    let gnatInfo = document.querySelectorAll('.gnat-info');
+    let count = 0;
+
+    gnatInfo.forEach((elem) => {
+      elemValue = +elem.innerHTML;
+      count = elemValue / gnatInfo.length;
+    })
+    
+    satiety.textContent = count;
+
+    setTimeout(() => {
+      satietyCount();
+    }, 500)
+  }
+  foodBtn.addEventListener('click', satietyCount);
 });

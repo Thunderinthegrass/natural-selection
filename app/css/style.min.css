@@ -312,11 +312,31 @@ input {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 5px;
+  height: 300px;
+  overflow-y: auto;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #f8baba;
+  border-right: none;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.gnat-icons::-webkit-scrollbar {
+  background-color: #fae2e2;
+  width: 5px;
+}
+.gnat-icons::-webkit-scrollbar-thumb {
+  background: #f79b9b;
+  border-radius: 20px;
 }
 
 .gnat-icon {
   width: 30px;
   height: 30px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   border: 2px solid;
   position: relative;
   border-radius: 100%;

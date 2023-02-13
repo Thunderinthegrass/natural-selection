@@ -100,10 +100,27 @@ input{
   display: flex;
   flex-direction: column;
   gap: 5px;
+  height: 300px;
+  overflow-y: auto;
+  appearance: none;
+  border: 1px solid #f8baba;
+  border-right: none;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  &::-webkit-scrollbar {
+    background-color: #fae2e2;
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #f79b9b;
+    border-radius: 20px;
+  }
 }
 .gnat-icon{
   width: 30px;
   height: 30px;
+  flex-shrink: 0;
   border: 2px solid;
   position: relative;
   border-radius: 100%;
