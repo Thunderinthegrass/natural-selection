@@ -68,7 +68,7 @@ function sortArray(array) {
   return array;
 }
 
-console.log(sortArray([-47, -30, -21, -34, 23, -27, -6, 33]));
+// console.log(sortArray([-47, -30, -21, -34, 23, -27, -6, 33]));
 
 // Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
 
@@ -90,7 +90,7 @@ function maskify(cc) {
   return cc;
 }
 
-console.log(maskify('1928374635463748'));
+// console.log(maskify('1928374635463748'));
 
 // In a factory a printer prints labels for boxes. For one kind of boxes the printer has to use colors which, for the sake of simplicity, are named with letters from a to m.
 
@@ -102,6 +102,16 @@ console.log(maskify('1928374635463748'));
 
 // The string has a length greater or equal to one and contains only letters from ato z.
 
+// На фабрике принтер печатает этикетки для коробок. Для одного вида коробок принтеру приходится использовать цвета, которые для простоты обозначаются буквами от а до m.
+
+// Цвета, используемые принтером, записываются в управляющую строку. Например, "хорошей" контрольной строкой будет aaabbbbhaijjjm, что означает, что принтер использовал три раза цвет a, четыре раза цвет b, один раз цвет h, а затем один раз цвет a...
+
+// Иногда возникают проблемы: отсутствие цветов, технический сбой и выдается "плохая" управляющая строка, например. aaaxbbbbyyhwawiwjjjwwm с буквами не от a до m.
+
+// Вы должны написать функцию printer_error, которая по заданной строке будет возвращать частоту ошибок принтера в виде строки, представляющей рациональное число, числитель которого — количество ошибок, а знаменатель — длина контрольной строки. Не уменьшайте эту дробь до более простого выражения.
+
+// Строка имеет длину больше или равную единице и содержит только буквы от a до z.
+
 // s="aaabbbbhaijjjm"
 // printer_error(s) => "0/14"
 
@@ -109,5 +119,26 @@ console.log(maskify('1928374635463748'));
 // printer_error(s) => "8/22"
 
 function printerError(s) {
-  // your code
+  let a = ['a','b','c','d','e','f','j','h','i','j','k','l','m'];
+  let numerator = 0;
+  let denominator = 0;
+
+  s = s.split('');
+
+  for (let i = 0; i < s.length; i++) {
+    let count = 0;
+    numerator++;
+    for (let k = 0; k < a.length; k++) {
+      if (s[i] == a[k]) {
+        count = 1;
+      }
+    }
+    if (count == 0) {
+      denominator++;
+    }
+  }
+
+  return `${denominator}/${numerator}`;
 }
+
+// console.log(printerError("aaaxbbbbyyhwawiwjjjwwm"));
