@@ -142,3 +142,138 @@ function printerError(s) {
 }
 
 // console.log(printerError("aaaxbbbbyyhwawiwjjjwwm"));
+
+
+// This time no story, no theory. The examples below show you how to write function accum:
+
+// Examples:
+// accum("abcd") -> "A-Bb-Ccc-Dddd"
+// accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+// accum("cwAt") -> "C-Ww-Aaa-Tttt"
+// The parameter of accum is a string which includes only letters from a..z and A..Z.
+
+function accum(s) {
+  let result = '';//создаем пустую строку
+  s = s.toLowerCase();//переводим исходную строку в нижний регистр
+	for (let i = 0; i < s.length; i++) {//проходимся циклом по строке
+    for (let k = 0; k < i+1; k++){//какая буква по счету в исходной строке, столько раз и запускаем цикл
+      if (k == 0) {//первая итерация переводит букву в верхний регистр
+        result += s[i].toUpperCase();
+      }
+      else {//последующие итерации добавляют эту же букву в строку без изменений
+        result += s[i];
+      }
+    }
+    if (i != s.length-1) {//если это не последняя буква строки, добавляем к строке после каждой итерации первого цикла дефис 
+      result += '-'
+    }
+  }
+  return result;//возвращаем результат
+}
+// console.log(accum('privEt'));
+
+
+// Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
+
+// For example, a tower with 3 floors looks like this:
+
+// [
+//   "  *  ",
+//   " *** ", 
+//   "*****"
+// ]
+// And a tower with 6 floors looks like this:
+
+// [
+//   "     *     ", 
+//   "    ***    ", 
+//   "   *****   ", 
+//   "  *******  ", 
+//   " ********* ", 
+//   "***********"
+// ]
+function towerBuilder(nFloors) {
+  let result = [];
+  let space = '';
+  let star = '';
+
+  for (let t = 0; t < nFloors; t++) {
+    space += ' ';
+  }
+  for (let i = 0; i < nFloors; i++) {
+    star = '*';
+    let spaceSplit = space.split('');
+    let spaceLess = spaceSplit.pop();
+    let spaceJoin = spaceSplit.join('');
+    space = spaceJoin;
+    let elem = `${space}${star}${space}`;
+    console.log(space)
+    for (let k = 0; k < i; k++) {
+      star += '**';
+      elem = `${space}${star}${space}`;
+    }
+    result.push(elem);
+    star = '';
+  }
+  return result;
+}
+// console.log(towerBuilder(3));
+
+
+// Find the missing letter
+// Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
+
+// You will always get an valid array. And it will be always exactly one letter be missing. The length of the array will always be at least 2.
+// The array will always contain letters in only one case.
+
+// Example:
+
+// ['a','b','c','d','f'] -> 'e'
+// ['O','Q','R','S'] -> 'P'
+// (Use the English alphabet with 26 letters!)
+
+// Have fun coding it and please don't forget to vote and rank this kata! :-)
+
+// I have also created other katas. Take a look if you enjoyed this kata!
+
+function findMissingLetter(array) {
+  let a = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','z','y','z',];
+  let coincidenceStart = 0;
+  let coincidenceEnd = 0;
+  let resultArr = [];
+  let result = '';
+  let isUpperCase = false;
+
+  if (array[0] === array[0].toUpperCase()) {
+    isUpperCase = true;
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    array[i] = array[i].toLowerCase();
+  }
+
+  for (let i = 0; i < a.length; i++) {
+      if (a[i] == array[0]) {
+        coincidenceStart = i;
+      }
+      if (a[i] == array[array.length-1]) {
+        coincidenceEnd = i;
+      }
+  }
+
+  for (let g = coincidenceStart; g < coincidenceEnd; g++) {
+    resultArr.push(a[g]);
+  }
+  console.log(resultArr);
+  console.log(array);
+
+  for (let l = 0; l < resultArr.length; l++) {
+    if (resultArr[l] != array[l] && isUpperCase === true) {
+      return resultArr[l].toUpperCase();
+    }
+    if (resultArr[l] != array[l] && isUpperCase === false) {
+      return resultArr[l];
+    }
+  }
+}
+// console.log(findMissingLetter(['a','b','c','d','f']));
