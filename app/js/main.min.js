@@ -42,28 +42,30 @@ let isSquare = function (n) {
 function sortArray(array) {
   let a = [];
 
-  for (let i = 0; i < array.length; i++) {//создаем массив с нечетными элементами
+  for (let i = 0; i < array.length; i++) {
+    //создаем массив с нечетными элементами
     if (array[i] % 2 != 0) {
       a.push(array[i]);
     }
   }
   let b = 0;
-  for (let j = 0; j < a.length; j++) {//сортируем массив с нечетными элементами
+  for (let j = 0; j < a.length; j++) {
+    //сортируем массив с нечетными элементами
     for (let i = 0; i < a.length - 1; i++) {
-      if (a[i] > a[i+1]) {
+      if (a[i] > a[i + 1]) {
         b = a[i];
-        a[i] = a[i+1];
-        a[i+1] = b;
+        a[i] = a[i + 1];
+        a[i + 1] = b;
       }
     }
   }
   let count = 0;
-  for (let i = 0; i < array.length; i++) {//заменяем в исходном массиве нечетные элементы элементами отсортированного массива нечетных элементов
+  for (let i = 0; i < array.length; i++) {
+    //заменяем в исходном массиве нечетные элементы элементами отсортированного массива нечетных элементов
     if (array[i] % 2 != 0) {
       array[i] = a[count];
       count++;
     }
-    
   }
   return array;
 }
@@ -79,14 +81,14 @@ function sortArray(array) {
 // Ваша задача — написать функцию maskify, которая заменяет все символы, кроме последних четырех, на «#».
 
 function maskify(cc) {
-  cc = cc.split('');
-  
+  cc = cc.split("");
+
   if (cc.length > 4) {
     for (let i = 0; i < cc.length - 4; i++) {
-      cc[i] = '#';
+      cc[i] = "#";
     }
   }
-  cc = cc.join('');
+  cc = cc.join("");
   return cc;
 }
 
@@ -119,11 +121,11 @@ function maskify(cc) {
 // printer_error(s) => "8/22"
 
 function printerError(s) {
-  let a = ['a','b','c','d','e','f','j','h','i','j','k','l','m'];
+  let a = ["a", "b", "c", "d", "e", "f", "j", "h", "i", "j", "k", "l", "m"];
   let numerator = 0;
   let denominator = 0;
 
-  s = s.split('');
+  s = s.split("");
 
   for (let i = 0; i < s.length; i++) {
     let count = 0;
@@ -143,7 +145,6 @@ function printerError(s) {
 
 // console.log(printerError("aaaxbbbbyyhwawiwjjjwwm"));
 
-
 // This time no story, no theory. The examples below show you how to write function accum:
 
 // Examples:
@@ -153,25 +154,28 @@ function printerError(s) {
 // The parameter of accum is a string which includes only letters from a..z and A..Z.
 
 function accum(s) {
-  let result = '';//создаем пустую строку
-  s = s.toLowerCase();//переводим исходную строку в нижний регистр
-	for (let i = 0; i < s.length; i++) {//проходимся циклом по строке
-    for (let k = 0; k < i+1; k++){//какая буква по счету в исходной строке, столько раз и запускаем цикл
-      if (k == 0) {//первая итерация переводит букву в верхний регистр
+  let result = ""; //создаем пустую строку
+  s = s.toLowerCase(); //переводим исходную строку в нижний регистр
+  for (let i = 0; i < s.length; i++) {
+    //проходимся циклом по строке
+    for (let k = 0; k < i + 1; k++) {
+      //какая буква по счету в исходной строке, столько раз и запускаем цикл
+      if (k == 0) {
+        //первая итерация переводит букву в верхний регистр
         result += s[i].toUpperCase();
-      }
-      else {//последующие итерации добавляют эту же букву в строку без изменений
+      } else {
+        //последующие итерации добавляют эту же букву в строку без изменений
         result += s[i];
       }
     }
-    if (i != s.length-1) {//если это не последняя буква строки, добавляем к строке после каждой итерации первого цикла дефис 
-      result += '-'
+    if (i != s.length - 1) {
+      //если это не последняя буква строки, добавляем к строке после каждой итерации первого цикла дефис
+      result += "-";
     }
   }
-  return result;//возвращаем результат
+  return result; //возвращаем результат
 }
 // console.log(accum('privEt'));
-
 
 // Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
 
@@ -179,46 +183,45 @@ function accum(s) {
 
 // [
 //   "  *  ",
-//   " *** ", 
+//   " *** ",
 //   "*****"
 // ]
 // And a tower with 6 floors looks like this:
 
 // [
-//   "     *     ", 
-//   "    ***    ", 
-//   "   *****   ", 
-//   "  *******  ", 
-//   " ********* ", 
+//   "     *     ",
+//   "    ***    ",
+//   "   *****   ",
+//   "  *******  ",
+//   " ********* ",
 //   "***********"
 // ]
 function towerBuilder(nFloors) {
   let result = [];
-  let space = '';
-  let star = '';
+  let space = "";
+  let star = "";
 
   for (let t = 0; t < nFloors; t++) {
-    space += ' ';
+    space += " ";
   }
   for (let i = 0; i < nFloors; i++) {
-    star = '*';
-    let spaceSplit = space.split('');
+    star = "*";
+    let spaceSplit = space.split("");
     let spaceLess = spaceSplit.pop();
-    let spaceJoin = spaceSplit.join('');
+    let spaceJoin = spaceSplit.join("");
     space = spaceJoin;
     let elem = `${space}${star}${space}`;
-    console.log(space)
+    console.log(space);
     for (let k = 0; k < i; k++) {
-      star += '**';
+      star += "**";
       elem = `${space}${star}${space}`;
     }
     result.push(elem);
-    star = '';
+    star = "";
   }
   return result;
 }
 // console.log(towerBuilder(3));
-
 
 // Find the missing letter
 // Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
@@ -237,11 +240,38 @@ function towerBuilder(nFloors) {
 // I have also created other katas. Take a look if you enjoyed this kata!
 
 function findMissingLetter(array) {
-  let a = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','z','y','z',];
+  let a = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "z",
+    "y",
+    "z",
+  ];
   let coincidenceStart = 0;
   let coincidenceEnd = 0;
   let resultArr = [];
-  let result = '';
+  let result = "";
   let isUpperCase = false;
 
   if (array[0] === array[0].toUpperCase()) {
@@ -253,12 +283,12 @@ function findMissingLetter(array) {
   }
 
   for (let i = 0; i < a.length; i++) {
-      if (a[i] == array[0]) {
-        coincidenceStart = i;
-      }
-      if (a[i] == array[array.length-1]) {
-        coincidenceEnd = i;
-      }
+    if (a[i] == array[0]) {
+      coincidenceStart = i;
+    }
+    if (a[i] == array[array.length - 1]) {
+      coincidenceEnd = i;
+    }
   }
 
   for (let g = coincidenceStart; g < coincidenceEnd; g++) {
@@ -277,3 +307,126 @@ function findMissingLetter(array) {
   }
 }
 // console.log(findMissingLetter(['a','b','c','d','f']));
+
+// На этот раз мы хотим написать вычисления с использованием функций и получить результаты. Давайте посмотрим на некоторые примеры:
+
+// seven(times(five())); // must return 35
+// four(plus(nine())); // must return 13
+// eight(minus(three())); // must return 5
+// six(dividedBy(two())); // must return 3
+// Требования:
+
+// Должна быть функция для каждого числа от 0 ("ноль") до 9 ("девять")
+// Должна быть функция для каждой из следующих математических операций: плюс, минус, умножить, разделить на
+// Каждое вычисление состоит ровно из одной операции и двух чисел
+// Самая внешняя функция представляет левый операнд, самая внутренняя функция представляет правый операнд.
+// Деление должно быть целочисленным . Например, это должно возвращать 2, а не 2.666666...:
+
+// function zero() {}
+// function one() {}
+// function two() {}
+// function three() {}
+// function four() {}
+// function five() {}
+// function six() {}
+// function seven() {}
+// function eight() {}
+// function nine() {}
+
+// function plus() {}
+// function minus() {}
+// function times() {}
+// function dividedBy() {}
+
+
+//решение
+// function zero(func) {
+//   return func ? func(0) : 0;
+// }
+// function one(func) {
+//   return func ? func(1) : 1;
+// }
+// function two(func) {
+//   return func ? func(2) : 2;
+// }
+// function three(func) {
+//   return func ? func(3) : 3;
+// }
+// function four(func) {
+//   return func ? func(4) : 4;
+// }
+// function five(func) {
+//   return func ? func(5) : 5;
+// }
+// function six(func) {
+//   return func ? func(6) : 6;
+// }
+// function seven(func) {
+//   return func ? func(7) : 7;
+// }
+// function eight(func) {
+//   return func ? func(8) : 8;
+// }
+// function nine(func) {
+//   return func ? func(9) : 9;
+// }
+
+// function plus(b) {
+//   return function (a) {
+//     return a + b;
+//   };
+// }
+// function minus(b) {
+//   return function (a) {
+//     return a - b;
+//   };
+// }
+// function times(b) {
+//   return function (a) {
+//     return a * b;
+//   };
+// }
+// function dividedBy(b) {
+//   return function (a) {
+//     return a / b;
+//   };
+// }
+
+// The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:
+
+// maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4])
+// // should be 6: [4, -1, 2, 1]
+// Easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.
+
+// Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.
+
+// Задача о максимальной сумме подмассива состоит в нахождении максимальной суммы непрерывной подпоследовательности в массиве или списке целых чисел:
+
+// maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4])
+// // should be 6: [4, -1, 2, 1]
+// Простой случай — это когда список состоит только из положительных чисел, а максимальная сумма — это сумма всего массива. Если список состоит только из отрицательных чисел, вместо этого верните 0.
+
+// Пустой список считается имеющим нулевую наибольшую сумму. Обратите внимание, что пустой список или массив также является допустимым подсписком/подмассивом.
+let arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+console.log(arr);
+function maxSequence(arr){
+  let currentSum = 0
+  let maxSum = 0
+  
+  if(arr.length === 0){
+      return 0
+  }
+
+  arr.forEach((elem, id) => {
+    currentSum = Math.max(elem, currentSum + elem);
+
+    console.log(`шаг ${id+1}:`);
+    console.log(`elem: ${elem}, currentSum: ${currentSum} currentSum+elem: ${currentSum} итог: ${currentSum}`);
+
+    maxSum = Math.max(maxSum, currentSum);
+
+    console.log(`maxSum: ${maxSum}, currentSum: ${currentSum} итог: ${maxSum}`);
+  })
+  return maxSum
+}
+console.log(maxSequence(arr));
