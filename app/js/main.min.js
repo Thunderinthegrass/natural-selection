@@ -133,26 +133,17 @@ function insertionSortt(arr) {
 }
 console.log(insertionSortt([7, 8, 6, 10, 5, 4, 3, 2, 9, 1]));
 
-function shakeSort(arr) {
-  let left = (lSwap = 0);
-  let right = (rSwap = arr.length - 1);
+function insertionSorttt(arr) {
+  for (i = 1; i < arr.length; i++) {
+    let current = arr[i];
+    let k = i;
 
-  while (left < right) {
-    for (let i = left; i < right; i++) {
-      if (arr[i] > arr[i + 1]) {
-        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-        rSwap = i;
-      }
+    while (current  < arr[k - 1] && k > 0) {
+      arr[k] = arr[k - 1];
+      k--;
     }
-    right = rSwap;
-    for (let i = right; i > left; i--) {
-      if (arr[i] < arr[i - 1]) {
-        [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]];
-        lSwap = i;
-      }
-    }
-    left = lSwap;
+    arr[k] = current;
   }
   return arr;
 }
-console.log(shakeSort([7, 8, 6, 10, 5, 4, 3, 2, 9, 1]));
+console.log(insertionSorttt([7, 8, 6, 10, 5, 4, 3, 2, 9, 1]));
