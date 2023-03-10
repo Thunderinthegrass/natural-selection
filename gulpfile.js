@@ -10,6 +10,7 @@ const del           = require('del');
 const webp          = require('gulp-webp');
 const webpHtml      = require('gulp-webp-html');
 const webpCss       = require('gulp-webp-css');
+const svgSprite = require("gulp-svg-sprite");
 
 function browsersync() {
   browserSync.init({
@@ -21,6 +22,20 @@ function browsersync() {
 
 function cleanDist() {
   return del('dist')
+}
+
+function svgSprites() {
+  return src("app/img/svg/**/**.svg")
+    .pipe(
+      svgSprite({
+        mode: {
+          stack: {
+            sprite: "../sprite.svg",
+          },
+        },
+      })
+    )
+    .pipe(dest("app/img/sprite"));
 }
 
 function images() {
@@ -97,9 +112,10 @@ exports.scripts = scripts;
 exports.images = images;
 exports.cleanDist = cleanDist;
 exports.html = html;
+exports.svgSprites = svgSprites;
 
 
-exports.build = series(cleanDist, html, images, build);
-exports.default = parallel(images, styles ,scripts ,browsersync, watching);
+exports.build = series(cleanDist, html, images, svgSprites, build);
+exports.default = parallel(images, styles, scripts, browsersync, svgSprites, watching);
 
 
