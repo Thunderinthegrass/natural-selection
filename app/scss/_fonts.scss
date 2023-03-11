@@ -8,30 +8,30 @@
 //     font-style: $style;
 //   }
 // }
-// @include font-face('Open Sans', '../fonts/roboto-regular', 400, 'normal');
-// @include font-face('Open Sans', '../fonts/roboto-medium', 500, 'normal');
-// @include font-face('Open Sans', '../fonts/roboto-bold', 700, 'normal');
+// @include font-face('Roboto', '../fonts/roboto-regular', 400, 'normal');
+// @include font-face('Roboto', '../fonts/roboto-medium', 500, 'normal');
+// @include font-face('Roboto', '../fonts/roboto-bold', 700, 'normal');
 
 @font-face {
   font-family: "Roboto";
-  src: url(../fonts/roboto-regular.woff2),
-  url(../fonts/roboto-regular.woff);
+  src: url(../fonts/Roboto-Regular.ttf), url(../fonts/Roboto-Regular.woff),
+    url(../fonts/Roboto-Regular.woff2);
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Roboto";
-  src: url(../fonts/roboto-medium.woff2),
-    url(../fonts/roboto-medium.woff);
+  src: url(../fonts/Roboto-Medium.ttf), url(../fonts/Roboto-Medium.woff),
+    url(../fonts/Roboto-Medium.woff2);
   font-weight: 500;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Roboto";
-  src: url(../fonts/roboto-bold.woff2),
-    url(../fonts/roboto-bold.woff);
+  src: url(../fonts/Roboto-Bold.ttf), url(../fonts/Roboto-Bold.woff),
+    url(../fonts/Roboto-Bold.woff2);
   font-weight: 700;
   font-display: swap;
   font-style: normal;
