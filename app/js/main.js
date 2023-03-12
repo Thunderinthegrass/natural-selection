@@ -1,7 +1,7 @@
 const dragAndDrop = () => {
-  const content = document.querySelector(".content");
+  const content = document.querySelectorAll(".content");
   const card = document.querySelectorAll(".card");
-  const bottomBlock = document.querySelector(".bottom-block");
+  // const bottomBlock = document.querySelector(".bottom-block");
 
   const dragStart = function (e) {
     setTimeout(() => {
@@ -30,7 +30,6 @@ const dragAndDrop = () => {
   const dragDrop = function (e) {
     this.append(content);
     this.classList.remove("hovered");
-    console.log(e.target);
     
   };
 
@@ -41,10 +40,10 @@ const dragAndDrop = () => {
     elem.addEventListener("drop", dragDrop);
   });
 
-  bottomBlock.addEventListener("dragover", dragOver);
-  bottomBlock.addEventListener("dragenter", dragEnter);
-  bottomBlock.addEventListener("dragleave", dragLeave);
-  bottomBlock.addEventListener("drop", dragDrop);
+  // bottomBlock.addEventListener("dragover", dragOver);
+  // bottomBlock.addEventListener("dragenter", dragEnter);
+  // bottomBlock.addEventListener("dragleave", dragLeave);
+  // bottomBlock.addEventListener("drop", dragDrop);
 
   content.addEventListener("dragstart", dragStart);
   content.addEventListener("dragend", dragEnd);
