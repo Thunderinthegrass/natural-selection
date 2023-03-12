@@ -5,48 +5,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../css/style.min.css">
-  <title>sneaks</title>
+  <title>trello</title>
 </head>
 <body>
-  <main class="main">
-    <div class="container">
-      <div class="wrapper">
-        <ul class="cards">
-          <li class="card">
-            <p class="cards__name">Первый пункт</p>
-            <div class="card__content content" draggable="true">
-              <div class="content__title">
-                Грунты
-              </div>
-              <p class="content__text">
-                Грунт - горные породы различного состава, свойств и происхождения, слагающие верхние слои земной коры, подверженные процессам выветривания.
-              </p>
-            </div>
-          </li>
-          <li class="card">
-            <p class="cards__name">Второй пункт</p>
-            <div class="card__content content" draggable="true">
-              <div class="content__title">
-                Механика грунтов
-              </div>
-              <p class="content__text">
-                Механика грунтов - комплексная дисциплина, изучающая как особенности поведения грунтов под нагрузкой, так и способы передачи нагрузок от сооружений на основание.
-              </p>
-            </div>
-          </li>
-          <li class="card">
-            <p class="cards__name">Третий пункт</p>
-          </li>
-          <li class="card">
-            <p class="cards__name">Четвертый пункт</p>
-          </li>
+  <div class="app">
+    <div class="boards">
+      <div class="boards__item">
+        <span contenteditable="true" class="title">Введите название</span>
+        <ul class="list">
+          <li class="list__item" draggable="true">Стартовая карточка</li>
         </ul>
-        <!-- <div class="bottom-block">
-
-        </div> -->
+        <div class="form d-none">
+          <textarea class="textarea" placeholder="Введите название карточки"></textarea>
+        </div>
+        <div class="buttons">
+          <button class="add__item-btn btn d-none">Добавить карточку</button>
+          <button class="cancel__item-btn btn d-none">Отмена</button>
+        </div>
+        <div class="add-btn btn"><span> + </span>Добавить карточку</div>
       </div>
     </div>
-  </main>
+    <button class="button btn">Добавить доску</button>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
