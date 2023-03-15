@@ -104,7 +104,7 @@ li {
   width: 100vw;
   height: 100vh;
   padding: 50px;
-  background-image: url("../img/1.webp");
+  background-image: url("../img-webp/1.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -115,10 +115,13 @@ li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 100%;
   gap: 15px;
 }
 .boards__item {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -127,12 +130,11 @@ li {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 10px;
-  background: #78325C;
+  background: #78325c;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
   border-radius: 5px;
-  gap: 10px;
   max-width: 270px;
   width: 100%;
 }
@@ -140,18 +142,17 @@ li {
   padding: 5px;
 }
 .boards__item .title:focus {
-  outline: 1px solid #E8A548;
+  outline: 1px solid #e8a548;
 }
 .boards .list {
-  min-height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 10px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-height: 40px;
 }
 .boards .list__item {
   background: #ffffff;
@@ -162,6 +163,29 @@ li {
   color: #443d43;
   font-weight: 500;
   font-size: 16px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.boards .list__item button {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  cursor: pointer;
+  background-image: url(../img/svg/remove.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.3;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.boards .list__item button:hover {
+  opacity: 1;
 }
 .boards .form {
   margin-top: auto;
@@ -174,6 +198,7 @@ li {
   outline: none;
   padding: 10px;
   height: 60px;
+  margin-bottom: 10px;
 }
 .boards .textarea::-webkit-input-placeholder {
   font-family: "Roboto";
@@ -200,7 +225,7 @@ li {
   gap: 10px;
 }
 .boards .add__item-btn {
-  background: #394B6A;
+  background: #394b6a;
 }
 .boards .add__item-btn:hover {
   background: #2c3a52;
@@ -213,11 +238,29 @@ li {
 }
 .boards .add-btn {
   padding: 10px;
-  background: #321B35;
+  background: #321b35;
   text-align: center;
 }
 .boards .add-btn:hover {
   background: #221224;
+}
+.boards .close-board-btn {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  cursor: pointer;
+  background-image: url(../img/svg/remove-board.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.3;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.boards .close-board-btn:hover {
+  opacity: 1;
 }
 
 .btn {
@@ -232,7 +275,7 @@ li {
 }
 
 .button {
-  background: #772C2E;
+  background: #772c2e;
   width: 250px;
   position: absolute;
   bottom: 40px;
@@ -241,6 +284,14 @@ li {
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
 }
-@supports (-webkit-appearance:none){
 
+.hovered {
+  background: #421E3C;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+@supports (-webkit-appearance:none){
+.boards .list__item button{background-image:url(../img/svg/remove.svg)}
+.boards .close-board-btn{background-image:url(../img/svg/remove-board.svg)}
 }

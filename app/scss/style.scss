@@ -1,45 +1,45 @@
-@import 'global';
-@import 'fonts';
-@import 'header';
-.app{
+@import "global";
+@import "fonts";
+@import "header";
+.app {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   padding: 50px;
-  background-image: url('../img/1.webp');
+  background-image: url("../img-webp/1.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   color: #ffffff;
 }
-.boards{
+.boards {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   gap: 15px;
-  &__item{
+  &__item {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background: #78325C;
-    transition: .3s;
+    background: #78325c;
+    transition: 0.3s;
     border-radius: 5px;
-    gap: 10px;
     max-width: 270px;
     width: 100%;
-    .title{
+    .title {
       padding: 5px;
-      &:focus{
-        outline: 1px solid #E8A548;
+      &:focus {
+        outline: 1px solid #e8a548;
       }
     }
   }
-  .list{
-    min-height: 40px;
+  .list {
     display: flex;
-    gap: 10px;
     flex-direction: column;
-    &__item{
+    min-height: 40px;
+    &__item {
       background: #ffffff;
       border-radius: 3px;
       padding: 10px;
@@ -48,62 +48,102 @@
       color: #443d43;
       font-weight: 500;
       font-size: 16px;
+      position: relative;
+      margin-bottom: 10px;
+      button {
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background-image: url(../img/svg/remove.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        opacity: 0.3;
+        transition: 0.3s;
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
-  .form{
+  .form {
     margin-top: auto;
     border-radius: 3px;
   }
-  .textarea{
+  .textarea {
     resize: none;
     width: 100%;
     border-radius: 3px;
     outline: none;
     padding: 10px;
     height: 60px;
-    &::placeholder{
-      font-family: 'Roboto';
+    margin-bottom: 10px;
+    &::placeholder {
+      font-family: "Roboto";
     }
   }
-  .buttons{
+  .buttons {
     display: flex;
     justify-content: end;
     gap: 10px;
   }
-  .add__item-btn{
-    background: #394B6A;
-    &:hover{
+  .add__item-btn {
+    background: #394b6a;
+    &:hover {
       background: #2c3a52;
     }
   }
-  .cancel__item-btn{
+  .cancel__item-btn {
     background: #8a0e3d;
-    &:hover{
+    &:hover {
       background: #790e37;
     }
   }
-  .add-btn{
+  .add-btn {
     padding: 10px;
-    background: #321B35;
+    background: #321b35;
     text-align: center;
-    &:hover{
+    &:hover {
       background: #221224;
     }
   }
+  .close-board-btn {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    cursor: pointer;
+    background-image: url(../img/svg/remove-board.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.3;
+    transition: 0.3s;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
-.btn{
+.btn {
   padding: 10px;
   cursor: pointer;
   color: #ffffff;
   border-radius: 3px;
   font-size: 16px;
-  transition: .3s;
+  transition: 0.3s;
 }
-.button{
-  background: #772C2E;
+.button {
+  background: #772c2e;
   width: 250px;
   position: absolute;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
+}
+.hovered{
+  background: #421E3C;
+  transition: .3s;
 }
