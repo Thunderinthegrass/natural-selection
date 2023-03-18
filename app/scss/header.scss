@@ -1,0 +1,74 @@
+.header {
+  background: #484283;
+  padding-top: 20px;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  .container{
+    align-items: center;
+  }
+  &__left {
+    grid-column: 2 span;
+  }
+  &__logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  &__right {
+    grid-column: 10 span;
+    display: flex;
+    justify-content: end;
+  }
+  .nav {
+    &__list {
+      display: flex;
+    }
+    &__item {
+      margin-right: 40px;
+    }
+    &__link {
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+  .cart {
+    &__btn {
+      color: #ffffff;
+      font-size: 14px;
+      line-height: 14px;
+      position: relative;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    &__icon {
+      width: 20px;
+      height: 18px;
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &__count {
+      position: absolute;
+      min-width: 16px;
+      height: 16px;
+      background: #f14f4f;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      right: 0;
+      bottom: -7px;
+    }
+  }
+}
+.hero{
+  height: 3000px;
+}
