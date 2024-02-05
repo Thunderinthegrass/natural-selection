@@ -1,8 +1,8 @@
 // // gnat--------------
-let scene = document.querySelector(".scene");
-let startBtn = document.querySelector(".start-btn");
-let stopBtn = document.querySelector(".stop-btn");
-let foodBtn = document.querySelector(".food-btn");
+const scene = document.querySelector(".scene");
+const startBtn = document.querySelector(".start-btn");
+const stopBtn = document.querySelector(".stop-btn");
+const foodBtn = document.querySelector(".food-btn");
 let foodEatenCount = 0;
 let foodEaten = document.querySelector('.food-eaten');
 let deadGnatCount = 0;
@@ -22,16 +22,18 @@ startBtn.addEventListener("click", function (e) {
     return;
   }
 
-  startBtn.setAttribute("disabled", "disabled");
+  // startBtn.setAttribute("disabled", "disabled");
   stopBtn.removeAttribute("disabled", "disabled");
 
-  let time = 1000;
+  let time = document.querySelector('.gnat-speed').value;
+  time = +time;
   let timeTransitionMin = time * 4;
   let timeTransitionMax = time * 5;
   let timeIntervalMin = time;
   let timeIntervalMax = time * 3;
   let size = 1.5;
   let gnatInputValue = document.querySelector('.gnat-input').value;
+  let gnatSizeValue = document.querySelector('.gnat-size').value;//размер комара
 
   
 
@@ -39,9 +41,16 @@ startBtn.addEventListener("click", function (e) {
     GWcreatePart(scene);
   }
 
-  function GWcreatePart(scene) {
+  function GWcreatePart(scene, inheritWidth) {
     let part = document.createElement("div");//создание едока
     part.className = "part";
+    if (inheritWidth) {
+      part.style.width = `${inheritWidth}px`;
+      part.style.height = `${inheritWidth}px`;
+    } else{
+      part.style.width = `${gnatSizeValue}px`;
+      part.style.height = `${gnatSizeValue}px`;
+    }
     scene.appendChild(part);
 
     let partInner = document.createElement("div");//наделение едока душой
@@ -136,19 +145,25 @@ startBtn.addEventListener("click", function (e) {
 
         function checkLocation() {//функция съедания еды
           let gnat = document.querySelectorAll('.part');//после появления еды берем всех едоков
+          let gnatSize = getComputedStyle(gnat[0]).width;
+          // console.log(gnatSize);
+          
+          
           setTimeout(() => {//каждые 10 миллисекунд проверяем, покрывает ли едок еду
             gnat.forEach((elem) => {
+              // console.log(getComputedStyle(elem).width);
+              
               function opacityMore(el, id) {//с каждым поеданием элемент становится более насыщенным
                 let elInner = el.querySelector('.part-inner');
                 let elemOpacity = window.getComputedStyle(elInner).opacity;
                 elemOpacity = +elemOpacity + 0.05;
                 elInner.style.opacity = elemOpacity;
-                console.log(elemOpacity)
 
                 if (elemOpacity > 0.95) {
+                  let inheritWidth = +el.getBoundingClientRect().width;
                       elemOpacity = 0.5;
                       elInner.style.opacity = elemOpacity;
-                      GWcreatePart(scene);
+                      GWcreatePart(scene, inheritWidth);
                     }
 
                 return;
@@ -156,7 +171,7 @@ startBtn.addEventListener("click", function (e) {
 
               let elemOp = window.getComputedStyle(elem).opacity;
 
-              if ((elem.getBoundingClientRect().x > (foodItem.getBoundingClientRect().x - 60) && elem.getBoundingClientRect().x < (foodItem.getBoundingClientRect().x + 20)) && (elem.getBoundingClientRect().y > (foodItem.getBoundingClientRect().y - 60) && elem.getBoundingClientRect().y < (foodItem.getBoundingClientRect().y + 20))) {
+              if ((elem.getBoundingClientRect().x > (foodItem.getBoundingClientRect().x - elem.getBoundingClientRect().width) && elem.getBoundingClientRect().x < (foodItem.getBoundingClientRect().x + 20)) && (elem.getBoundingClientRect().y > (foodItem.getBoundingClientRect().y - elem.getBoundingClientRect().width) && elem.getBoundingClientRect().y < (foodItem.getBoundingClientRect().y + 20))) {
                 scene.removeChild(foodItem);
                 opacityMore(elem);
 
@@ -221,7 +236,7 @@ startBtn.addEventListener("click", function (e) {
         elemOpacity = elemOpacity - 0.05;
         elInner.style.opacity = elemOpacity;
         gnatInfo[id].textContent = elemOpacity.toFixed(2);//добавление подписи со значением прозрачности к иконке комара
-        console.log(elemOpacity);
+        // console.log(elemOpacity);
 
         if (elemOpacity < 0.05) {
               scene.removeChild(elem);
